@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/MarkGranade/symmetrical-potato/issues"
   },
-  "homepage": "https://github.com/MarkGranade/symmetrical-potato#readme"
+  "homepage": "https://github.com/MarkGranade/symmetrical-potato#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
