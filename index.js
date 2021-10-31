@@ -1,13 +1,16 @@
+// packages
 const fs = require('fs');
 const inquirer = require('inquirer');
-
-const Employee = require('./lib/Employee');
+// local
+const generateTemplate = require('./src/page-template');
+const { writeFile, copyFile } = require('./utils/generate-site');
+// classes
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-
 // array to hold team data
 const teamData = [];
+// ===========================================================================================================
 
 const promptManager = () => {
     return inquirer.prompt([
@@ -65,19 +68,13 @@ const promptManager = () => {
                 }
             }
         },
-        {
-            type: 'list',
-            name: 'confirmAddTeam',
-            message: 'Would you like to add another team member?',
-            choices: ['Engineer', 'Inter', 'Finish building your team']
-        }
     ])
 };
 
 const promptTeam = () => {
     console.log(`
 =================
-Add a New Project
+Add a Team Member
 =================
 `);
     return inquirer.prompt([
@@ -148,27 +145,50 @@ Add a New Project
     ])
 };
 
+// function checkData(teamData, employeeData) {
+//     console.log('test 1: ',teamData);
+//     console.log('test 2: ', employeeData);
+//     if (employeeData.addTeam === false) {
+//         console.log('checkTeamData: ', teamData);
+//         console.log('checkEmployeeData: ', employeeData);
+//     }
+// };
+
+
 promptManager()
+    // take data from promptManager()
     .then(managerData => {
+        // use data to create new Manager object
         let newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber);
+        // push newManager object to teamData Array
         teamData.push(newManager);
     })
-    .then(promptTeam)
-    .then(employeeData => {
-        console.log(employeeData);
 
+    // initiates promptTeam inquirer function
+    .then(promptTeam)
+
+    // take data from promptTeam()
+    .then(employeeData => {
+        // if Engineer selected
         if (employeeData.role === 'Engineer') {
+            // use data to create new Engineer object
             let newEngineer = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github)
+            // push newEngineer to teamData Array
             teamData.push(newEngineer);
+        // if Intern selected
         } else {
+            // use data to create new Intern object
             let newIntern = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school);
+            // push newIntern to teamData Array
             teamData.push(newIntern);
         }
 
+        // if "yes" is selected for addTeam run promptTeam() again
         if (employeeData.addTeam === true) {
             promptTeam();
+        } else {
+            console.log('teamData: ', teamData);
         }
-        console.log(teamData);
     });
 
 module.exports = promptManager;
