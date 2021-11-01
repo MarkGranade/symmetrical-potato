@@ -1,5 +1,4 @@
 // packages
-const fs = require('fs');
 const inquirer = require('inquirer');
 // local
 const generateTemplate = require('./src/page-template');
@@ -10,20 +9,6 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 // array to hold team data
 const teamData = [];
-// ===========================================================================================================
-// MOCK DATA
-// const mockData = [];
-// const mockManager = new Manager('Mark', '4', 'test@gmail.com', '555-555-5555');
-// const mockEngineer = new Engineer('Ryan', '12', 'ryan@gmail.com', 'RyGuy');
-// const mockIntern = new Intern('Allie', '27', 'allie@yahoo.com', 'Rutgers');
-// const mockJesus = new Engineer('Jesus', '69', 'JebusChrist@gmail.com', 'HolyGit');
-// const createMock = () => {
-//     mockData.push(mockManager);
-//     mockData.push(mockEngineer);
-//     mockData.push(mockIntern);
-//     mockData.push(mockJesus);
-// };
-// ===========================================================================================================
 
 const promptManager = () => {
     return inquirer.prompt([
@@ -199,69 +184,4 @@ promptManager()
         console.log(err);
     });
 
-// ===========================================================================================================
-// MOCK DATA FUNCTION
-// createMock();
-// function writeToFile(mockData) {
-//     fs.writeFile('./dist/index.html', pageHTML, err => {
-//         if (err) throw err;
-//         console.log('Success');
-//     });
-// };
-// const pageHTML = generateTemplate(mockData);
-// writeToFile(mockData);
-// ===========================================================================================================
-
-
 module.exports = promptManager;
-
-
-
-
-// function checkData(teamData, employeeData) {
-//     console.log('test 1: ',teamData);
-//     console.log('test 2: ', employeeData);
-//     if (employeeData.addTeam === false) {
-//         console.log('checkTeamData: ', teamData);
-//         console.log('checkEmployeeData: ', employeeData);
-//     }
-// };
-
-
-// promptManager()
-//     // take data from promptManager()
-//     .then(managerData => {
-//         // use data to create new Manager object
-//         let newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber);
-//         // push newManager object to teamData Array
-//         teamData.push(newManager);
-//     })
-
-//     // initiates promptTeam inquirer function
-//     .then(promptTeam)
-
-//     // take data from promptTeam()
-//     .then(employeeData => {
-//         // if Engineer selected
-//         if (employeeData.role === 'Engineer') {
-//             // use data to create new Engineer object
-//             let newEngineer = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github, employeeData.addTeam)
-//             // push newEngineer to teamData Array
-//             teamData.push(newEngineer);
-//         // if Intern selected
-//         } else if (employeeData.role === 'Intern') {
-//             // use data to create new Intern object
-//             let newIntern = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school, employeeData.addTeam);
-//             // push newIntern to teamData Array
-//             teamData.push(newIntern);
-//         }
-
-//         console.log(employeeData);
-
-//         // if "yes" is selected for addTeam run promptTeam() again
-//         if (employeeData.addTeam === true) {
-//             promptTeam(teamData);
-//         } else {
-//             console.log('teamData: ', teamData);
-//         }
-//     });

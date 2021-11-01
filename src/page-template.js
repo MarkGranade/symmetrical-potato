@@ -1,7 +1,7 @@
 const managerHTML = manager => {
     return `
             <div class="col">
-                <div class="card shadow-lg">
+                <div class="card border border-dark shadow-lg">
                     <div class="bg-primary">
                         <div class="card-header">
                             <h2 class="text-light">${manager.name}</h2>
@@ -30,7 +30,7 @@ const managerHTML = manager => {
 const engineerHTML = engineer => {
     return `
             <div class="col">
-                <div class="card shadow-lg">
+                <div class="card border border-dark shadow-lg">
                     <div class="bg-primary">
                         <div class="card-header">
                             <h2 class="text-light">${engineer.name}</h2>
@@ -59,7 +59,7 @@ const engineerHTML = engineer => {
 const internHTML = intern => {
     return `
             <div class="col">
-                <div class="card shadow-lg">
+                <div class="card border border-dark shadow-lg">
                     <div class="bg-primary">
                         <div class="card-header">
                             <h2 class="text-light">${intern.name}</h2>
@@ -87,23 +87,14 @@ const internHTML = intern => {
 
 const createCards = (cardArray) => {
     const roleCards = [];
-    // push manager data to html array
-    roleCards.push(cardArray
-        .filter(teamMember => teamMember.getRole() === 'Manager')
+    roleCards.push(cardArray.filter(teamMember => teamMember.getRole() === 'Manager')
         .map(manager => managerHTML(manager))
     );
-    // push engineer data to html array
-    roleCards.push(cardArray
-        .filter(teamMember => teamMember.getRole() === 'Engineer')
+    roleCards.push(cardArray.filter(teamMember => teamMember.getRole() === 'Engineer')
         .map(engineer => engineerHTML(engineer))
     );
-    roleCards.push(cardArray
-        .filter(teamMember => teamMember.getRole() === 'Intern')
-        .map(intern => internHTML(intern))
-    );
+    roleCards.push(cardArray.filter(teamMember => teamMember.getRole() === 'Intern').map(intern => internHTML(intern)));
     console.log(roleCards);
-
-    // return and join all arrays in html
     return roleCards.join('');
 };
 
@@ -139,65 +130,4 @@ ${createCards(data)}
     `;
 }
 
-{/* <body>
-        <header class="container-fluid bg-danger text-light .bg-gradient">
-            <div class="row">
-                <h1 class="col-12 text-center">My Team</h1>
-            </div>
-        </header>
-
-        <div class>
-            ${createCards(data)}
-        </div>
-
-    </body> */}
-
 module.exports = generateTemplate;
-
-
-
-// const generateManager = manager => {
-//     return `
-//     <div>
-//         <div>
-//             <header>
-//                 <div>
-//                     <p>${manager.name}</p>
-//                 </div>
-//             </header>
-//             <div>
-//                 <div>
-//                     <p>Employee ID: ${manager.id}</p>
-//                     <p>Employee Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
-//                     <p>Office Number: ${manager.id}</p>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//     `;
-// }
-
-// const generateEngineer = engineer => {
-//     return `
-//     <div>
-//         <div>
-//             <header>
-//                 <div>
-//                     <p>${engineer.name}</p>
-//                 </div>
-//             </header>
-//             <div>
-//                 <div>
-//                     <p>Employee ID: ${engineer.id}</p>
-//                     <p>Employee Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
-//                     <p>GitHub: <a href="www.github.com/${engineer.github}">${engineer.github}</a></p>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//     `;
-// }
-
-// const generateCards = (teamArray) => {
-//     const html = []
-// }
